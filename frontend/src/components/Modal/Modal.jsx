@@ -28,7 +28,7 @@ const Modal = () => {
             </button>
           </div>
           <div className="modal-body">
-            <p>You can put any content here.</p>
+            <p>Hello uwu</p>
           </div>
           <div className="modal-footer">
             <button

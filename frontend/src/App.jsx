@@ -2,8 +2,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // Styles
-import 'bootstrap/dist/css/bootstrap.min.css'; // Estilos principales de Bootstrap
-import 'bootstrap-icons/font/bootstrap-icons.css'; // Íconos de Bootstrap
+import "bootstrap/dist/css/bootstrap.min.css"; // Estilos principales de Bootstrap
+import "bootstrap-icons/font/bootstrap-icons.css"; // Íconos de Bootstrap
 import "./App.css";
 
 // Components
