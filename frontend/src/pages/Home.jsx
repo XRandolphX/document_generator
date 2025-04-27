@@ -17,10 +17,10 @@ import Select from "react-select";
 import { FaBars } from "react-icons/fa";
 
 // Context
-import { useGlobalContext } from "../../context/AppContext";
+import { useGlobalContext } from "../hooks/useGlobalContext";
 
 // Assets
-import loadFileGif from "../../assets/load_file.gif";
+import loadFileGif from "../assets/load_file.gif";
 
 // Importando axios para solicitudes HTTP
 import axios from "axios";

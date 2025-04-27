@@ -11,12 +11,12 @@ import Modal from "./components/Modal/Modal";
 import Sidebar from "./components/Sidebar/Sidebar";
 
 // Pages
-import Home from "./components/Home/Home";
+import NotFound from "./pages/NotFound";
+import Home from "./pages/Home";
 // import Documents from "./pages/Documents";
 // import Add from "./pages/Add";
 // import Update from "./pages/Update";
 // import AI from "./pages/AI";
-// import NotFound from "./pages/NotFound";
 // import Register from "./pages/User_Register";
 // import Login from "./pages/Login";
 
@@ -25,7 +25,9 @@ function App() {
     <BrowserRouter>
       <Modal />
       <Sidebar />
+
       <Routes>
+        <Route path="*" element={<NotFound />} />
         <Route path="/" element={<Home />} />
       </Routes>
     </BrowserRouter>

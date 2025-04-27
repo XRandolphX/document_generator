@@ -1,5 +1,5 @@
 import logo from "../../assets/logo_ricardo_palma.png";
-import { useGlobalContext } from "../../context/AppContext";
+import { useGlobalContext } from "../../hooks/useGlobalContext";
 import { FaTimes } from "react-icons/fa";
 import { navLinks, socialLinks } from "./data";
 import { Link } from "react-router-dom";
@@ -11,12 +11,11 @@ const Sidebar = () => {
 
   return (
     <aside
-      className={`position-fixed start-0 top-0 h-100 bg-white shadow-sm z-3 ${
-        isSidebarOpen ? "translate-x-0" : "-translate-x-100"
-      }`}
+      className="position-fixed start-0 top-0 h-100 bg-white shadow-sm z-3"
       style={{
         width: "250px",
         transition: "transform 0.3s ease-in-out",
+        transform: isSidebarOpen ? "translateX(0)" : "translateX(-100%)",
       }}
     >
       <Container fluid className="p-3">

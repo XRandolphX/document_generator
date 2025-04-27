@@ -1,5 +1,5 @@
 // Context
-import { useGlobalContext } from "../../context/AppContext";
+import { useGlobalContext } from "../../hooks/useGlobalContext";
 // Icon
 import { FaTimes } from "react-icons/fa";
 
