@@ -21,3 +21,9 @@ Solo se borrará automáticamente cuando:
 - Si reinstalas Poetry o cambias de versión de Python y el entorno deja de ser compatible.
 
 Si en tu caso quieres que el entorno virtual `.venv` no se guarde en caché y esté dentro de tu proyecto, configura: `- poetry config virtualenvs.in-project true`.
+
+📸 Capturas de Pantalla
+
+A continuación, algunas capturas de pantalla de la aplicación:
+
+![Home](./frontend/public/Home.png)
