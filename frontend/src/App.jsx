@@ -7,8 +7,8 @@ import 'bootstrap-icons/font/bootstrap-icons.css'; // Íconos de Bootstrap
 import "./App.css";
 
 // Components
-// import Modal from "./components/Modal";
-// import Sidebar from "./components/SideBar/Sidebar";
+import Modal from "./components/Modal/Modal";
+import Sidebar from "./components/Sidebar/Sidebar";
 
 // Pages
 import Home from "./components/Home/Home";
@@ -23,8 +23,8 @@ import Home from "./components/Home/Home";
 function App() {
   return (
     <BrowserRouter>
-      {/* <Modal />
-      <Sidebar /> */}
+      <Modal />
+      <Sidebar />
       <Routes>
         <Route path="/" element={<Home />} />
       </Routes>

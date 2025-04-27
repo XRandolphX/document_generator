@@ -10,8 +10,10 @@ import {
   Card,
 } from "react-bootstrap";
 
+// Importando react-select para listas desplegables
 import Select from "react-select";
-import axios from "axios";
+
+// Importando el ícono de barras (menú) desde react-icons
 import { FaBars } from "react-icons/fa";
 
 // Context
@@ -19,6 +21,9 @@ import { useGlobalContext } from "../../context/AppContext";
 
 // Assets
 import loadFileGif from "../../assets/load_file.gif";
+
+// Importando axios para solicitudes HTTP
+import axios from "axios";
 
 const DocumentGenerator = () => {
   const { openSidebar } = useGlobalContext();
@@ -30,7 +35,7 @@ const DocumentGenerator = () => {
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [selectedOption, setSelectedOption] = useState(null);
   const [inputOptionValue, setInputOptionValue] = useState("");
-  // const [showFilters, setShowFilters] = useState(false);
+  const [showFilters, setShowFilters] = useState(false);
   const [showCustomPrompt, setShowCustomPrompt] = useState(false);
   const [customPromptValue, setCustomPromptValue] = useState("");
 
@@ -60,7 +65,7 @@ const DocumentGenerator = () => {
   const handleInputChange = (e) => setInputValue(e.target.value);
   const handleCustomPromptChange = (e) => setCustomPromptValue(e.target.value);
   const handleOptionInputChange = (e) => setInputOptionValue(e.target.value);
-  // const toggleFilters = () => setShowFilters((prev) => !prev);
+  const toggleFilters = () => setShowFilters((prev) => !prev);
   const toggleCustomPrompt = () => setShowCustomPrompt((prev) => !prev);
 
   // Ref
@@ -176,13 +181,13 @@ const DocumentGenerator = () => {
             </Card.Body>
           </Card>
 
-          {/* <Button
+          <Button
             variant={showFilters ? "outline-danger" : "outline-primary"}
             onClick={toggleFilters}
             className="w-100 mb-4 py-2 fw-bold shadow-sm"
           >
             {showFilters ? "Descartar Filtros" : "Aplicar Filtros"}
-          </Button> */}
+          </Button>
 
           {showFilters && (
             <Card className="border-0 shadow-sm mb-4">
