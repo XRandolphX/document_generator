@@ -176,13 +176,13 @@ const DocumentGenerator = () => {
             </Card.Body>
           </Card>
 
-          <Button
+          {/* <Button
             variant={showFilters ? "outline-danger" : "outline-primary"}
             onClick={toggleFilters}
             className="w-100 mb-4 py-2 fw-bold shadow-sm"
           >
             {showFilters ? "Descartar Filtros" : "Aplicar Filtros"}
-          </Button>
+          </Button> */}
 
           {showFilters && (
             <Card className="border-0 shadow-sm mb-4">
