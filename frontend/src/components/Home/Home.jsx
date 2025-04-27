@@ -30,7 +30,7 @@ const DocumentGenerator = () => {
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [selectedOption, setSelectedOption] = useState(null);
   const [inputOptionValue, setInputOptionValue] = useState("");
-  const [showFilters, setShowFilters] = useState(false);
+  // const [showFilters, setShowFilters] = useState(false);
   const [showCustomPrompt, setShowCustomPrompt] = useState(false);
   const [customPromptValue, setCustomPromptValue] = useState("");
 
@@ -60,7 +60,7 @@ const DocumentGenerator = () => {
   const handleInputChange = (e) => setInputValue(e.target.value);
   const handleCustomPromptChange = (e) => setCustomPromptValue(e.target.value);
   const handleOptionInputChange = (e) => setInputOptionValue(e.target.value);
-  const toggleFilters = () => setShowFilters((prev) => !prev);
+  // const toggleFilters = () => setShowFilters((prev) => !prev);
   const toggleCustomPrompt = () => setShowCustomPrompt((prev) => !prev);
 
   // Ref
