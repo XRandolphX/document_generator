@@ -13,12 +13,11 @@ import Sidebar from "./components/Sidebar/Sidebar";
 // Pages
 import NotFound from "./pages/NotFound";
 import Home from "./pages/Home";
-// import Documents from "./pages/Documents";
-// import Add from "./pages/Add";
-// import Update from "./pages/Update";
-// import AI from "./pages/AI";
-// import Register from "./pages/User_Register";
-// import Login from "./pages/Login";
+import Login from "./pages/Login";
+import UserRegister from "./pages/UserRegister";
+import Document from "./pages/Document";
+import AddDoc from "./pages/AddDoc";
+import UpdateDoc from "./pages/UpdateDoc";
 
 function App() {
   return (
@@ -29,6 +28,11 @@ function App() {
       <Routes>
         <Route path="*" element={<NotFound />} />
         <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/doc" element={<Document />} />
+        <Route path="/add-doc" element={<AddDoc />} />
+        <Route path="/user-register" element={<UserRegister />} />
+        <Route path="/update-doc/:id" element={<UpdateDoc />} />
       </Routes>
     </BrowserRouter>
   );
