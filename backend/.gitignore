@@ -21,7 +21,7 @@ __pycache__/
 
 # Ignorando carpetas
 generated_files
-template
+templates
 
 # Ignorando PDF
 document_generated.pdf

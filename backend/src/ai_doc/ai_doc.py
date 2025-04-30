@@ -1,5 +1,7 @@
 # Importando el modulo para interactuar con el sistema operativo
 import os
+# Importando la librería para trabajar con rutas de archivos
+from pathlib import Path
 # Importando la librería dotenv
 from dotenv import load_dotenv
 # Importando la libreria para Fechas y Horas 
@@ -27,7 +29,7 @@ def modify_prompt(original_prompt):
         f"Basándote en el siguiente prompt del documento de sesión de aprendizaje: '{original_prompt}', "
         "por favor proporciona una respuesta estructurada sin ningún formato adicional (sin markdown, numerales, asteriscos ni encabezados). "
         "Cada sección debe estar en una línea con el siguiente formato: 'clave: contenido'. "
-        "Las claves a generar son: competencia, desempeno, criterio, instrumentoevaluacion, evidencia, purpose, actitudes, antessession, recursos, inicio, situationproblem, preguntassituation, preguntainvestigation, hypothesis, preguntastema."
+        "Las claves a generar son: title, competencia, desempeno, criterio, instrumentoevaluacion, evidencia, purpose, actitudes, antessession, recursos, inicio, situationproblem, preguntassituation, preguntainvestigation, hypothesis, preguntastema."
         "Asegúrate de que la respuesta siga exactamente este formato para evitar errores de coincidencia."
     )
     return modified_prompt
@@ -53,6 +55,7 @@ def process_response(response):
 
     # Define patrones usando lookahead para delimitar el final de cada sección sin capturarlo.
     patterns = {
+        'title': re.compile(r'title:\s*(.*?)(?=competencia:|$)', re.DOTALL | re.IGNORECASE),
         'competencia': re.compile(r'competencia:\s*(.*?)(?=desempeno:|$)', re.DOTALL | re.IGNORECASE),
         'desempeno': re.compile(r'desempeno:\s*(.*?)(?=criterio:|$)', re.DOTALL | re.IGNORECASE),
         'criterio': re.compile(r'criterio:\s*(.*?)(?=instrumentoevaluacion:|$)', re.DOTALL | re.IGNORECASE),
@@ -86,20 +89,39 @@ def convert_to_pdf(doc_path):
     if not os.path.isfile(doc_path):
         raise FileNotFoundError(f"El archivo {doc_path} no existe.")
     
+    # Determinar la carpeta de salida (donde se encuentra el .docx)
+    output_folder = os.path.dirname(doc_path)
+    # Asegurarse de que la carpeta de salida existe
+    os.makedirs(output_folder, exist_ok=True)
+
+    # Nombre del archivo PDF: mismo que el .docx pero con extensión .pdf
+    pdf_name = os.path.splitext(os.path.basename(doc_path))[0] + ".pdf"
+    pdf_path = os.path.join(output_folder, pdf_name)
+
     try:
-        # Ejecuta LibreOffice en modo headless para la conversión
+        # Pasar --outdir para que soffice genere el PDF
         subprocess.run(
-            ["libreoffice", "--headless", "--convert-to", "pdf", doc_path],
+            [
+                "soffice", 
+                "--headless", 
+                "--convert-to", "pdf",
+                "--outdir", output_folder, 
+                doc_path
+            ],
             check = True,
             stdout = subprocess.PIPE,
             stderr = subprocess.PIPE
         )
-        pdf_path = doc_path.replace(".docx", ".pdf")
+        # Comprobando en generated_files
         if not os.path.isfile(pdf_path):
-            raise RuntimeError("Error en la conversión: el archivo PDF no fue generado.")
+            raise RuntimeError(
+                f"Error en la conversión: el archivo PDF no fue generado en {output_folder}."
+            )
         return pdf_path
+
     except subprocess.CalledProcessError as e:
-        raise RuntimeError(f"Error ejecutando LibreOffice: {e.stderr.decode()}")
+        stderr = e.stderr.decode(errors="ignore")
+        raise RuntimeError(f"Error ejecutando LibreOffice: {stderr}")
 
 def generate_document(user_input): 
     # Inicializa el historial del chat y modifica el prompt
@@ -131,7 +153,7 @@ def generate_document(user_input):
 
 
     # Procesa la respuesta en secciones
-    (competencias_capacidades_GPT, desempeno_GPT, criterio_GPT, instrumento_evaluacion_GPT,
+    (title_GPT,competencias_capacidades_GPT, desempeno_GPT, criterio_GPT, instrumento_evaluacion_GPT,
      evidencia_GPT, purpose_GPT, actitudes_GPT, antes_session_GPT, recursos_GPT, inicio_GPT,
      situation_problem_GPT, preguntas_situation_GPT, pregunta_investigation_GPT, hypothesis_GPT,
      preguntas_tema_GPT) = process_response(full_reply_content)
@@ -140,6 +162,7 @@ def generate_document(user_input):
     # Prepara el contexto para el documento
     fecha = datetime.today().strftime("%d %b, %Y")
     context = {
+        'title': title_GPT,
         'competencias_capacidades': competencias_capacidades_GPT,
         'desempeno': desempeno_GPT,
         'criterio_evaluacion': criterio_GPT,
@@ -160,11 +183,10 @@ def generate_document(user_input):
 
     output_dir = os.path.join(os.path.dirname(__file__), "generated_files")
     os.makedirs(output_dir, exist_ok=True)
-
     doc_path = os.path.join(output_dir, "document_generated.docx")
 
     # Renderizar y guardar el documento
-    template_path = os.path.join(os.path.dirname(__file__), "template", "class_template.docx")
+    template_path = os.path.join(os.path.dirname(__file__), "templates", "class_template.docx")
     doc = DocxTemplate(template_path)
     doc.render(context)
     doc.save(doc_path)

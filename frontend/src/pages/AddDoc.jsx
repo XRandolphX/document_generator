@@ -28,7 +28,7 @@ const Add = () => {
   const navigate = useNavigate();
 
   // Contexto global
-  const { openSidebar, openModal } = useGlobalContext();
+  const { openSidebar } = useGlobalContext();
 
   /**
    * Maneja los cambios de los inputs de texto
@@ -82,9 +82,6 @@ const Add = () => {
       <div className="d-flex justify-content-between align-items-center mb-4">
         <Button variant="secondary" onClick={openSidebar}>
           <FaBars />
-        </Button>
-        <Button variant="primary" onClick={openModal}>
-          Mostrar Modal
         </Button>
       </div>
 

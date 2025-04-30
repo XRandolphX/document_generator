@@ -1,29 +1,96 @@
-# Proyecto Full Stack
+## 📚 Full Stack Project
 
-Este repositorio contiene el frontend y backend de mi aplicación.
+This repository contains the **frontend** and **backend** of my application.
 
-## 📂 Estructura
+### Structure
 
-- `frontend/` → Código del cliente (React)
-- `backend/` → Código del servidor (Flask)
+- **frontend/**: Client-side code (React with Bun).
+- **backend/**: Server-side code (Flask with Poetry).
 
-## 🚀 Cómo ejecutar
+---
 
-1. Entra a `frontend/` y ejecuta `bun install` luego `bun run dev`.
-2. Entra a `backend/` y ejecuta `poetry install`.
+### 🚀 Installation and Run
 
-**Nota:** Poetry por defecto instala el entorno virtual en una carpeta de caché `.cache/pypoetry/virtualenvs/` y seguirá existiendo en la caché hasta que lo elimines manualmente con: `poetry env remove <nombre-del-entorno>`.
+1. **Frontend**
+   ```bash
+   cd frontend
+   bun install
+   bun run dev
+   ```
+2. **Backend**
+   ```bash
+   cd backend
+   poetry install
+   ```
 
-Solo se borrará automáticamente cuando:
+> **Tip**: To activate the Poetry virtual environment:
+>
+> ```bash
+> source .venv/bin/activate  # or
+> poetry env activate <env-name>
+> ```
 
-- Ejecutes un comando para limpiar caché, como `poetry cache clear pypoetry --all`.
-- Si eliminas la carpeta `.cache/pypoetry/virtualenvs/` manualmente.
-- Si reinstalas Poetry o cambias de versión de Python y el entorno deja de ser compatible.
+**Prerequisite for PDF conversion:**
 
-Si en tu caso quieres que el entorno virtual `.venv` no se guarde en caché y esté dentro de tu proyecto, configura: `- poetry config virtualenvs.in-project true`.
+- This project uses LibreOffice in headless mode to convert `.docx` files to PDF.
+- Make sure to install LibreOffice Writer on your system:
+  ```bash
+  sudo apt update
+  sudo apt install libreoffice-writer -y
+  ```
 
-📸 Capturas de Pantalla
+---
 
-A continuación, algunas capturas de pantalla de la aplicación:
+### 🔧 Poetry Configuration
 
-![Home](./frontend/public/Home.png)
+- **Install dependencies + project**:
+  ```bash
+  poetry install
+  ```
+- **Install only dependencies**:
+  ```bash
+  poetry install --no-root
+  ```
+
+By default, Poetry stores venvs in `~/.cache/pypoetry/virtualenvs/`. To generate the venv inside your project:
+
+```bash
+poetry config virtualenvs.in-project true
+poetry env remove <cache-env-name>  # remove cached env if exists
+poetry install
+```
+
+---
+
+### 🔒 Environment Variables
+
+Create a `.env` file at the root of **backend** with your API key:
+
+```
+API_KEY=<your_api_key>
+```
+
+I recommend getting your API_KEY from [OpenRouter](https://openrouter.ai).
+
+---
+
+### 🗂 Document Templates
+
+To use Word document generation:
+
+1. Create a **template/** folder inside **backend**.
+2. Place your `.docx` template file into **backend/template/**.
+
+---
+
+### 📸 Screenshots
+
+![Home Page](./frontend/public/home.png)
+
+![Console](./frontend/public/console-2.png)
+
+![Eplorer VS Code](./frontend/public/explorer-vscode.png)
+
+![Sample](./frontend/public/sample.png)
+
+<!-- ![Document Interface](./frontend/public/document_interface.png) -->

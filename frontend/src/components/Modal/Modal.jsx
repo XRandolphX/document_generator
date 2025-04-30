@@ -1,7 +1,5 @@
 // Context
 import { useGlobalContext } from "../../hooks/useGlobalContext";
-// Icon
-import { FaTimes } from "react-icons/fa";
 
 const Modal = () => {
   const { isModalOpen, closeModal } = useGlobalContext();
@@ -17,15 +15,13 @@ const Modal = () => {
       <div className="modal-dialog" role="document">
         <div className="modal-content">
           <div className="modal-header">
-            <h5 className="modal-title">Modal Content</h5>
+            <h5 className="modal-title">Cotenido del Modal</h5>
             <button
               type="button"
               className="btn-close"
               onClick={closeModal}
               aria-label="Close"
-            >
-              <FaTimes />
-            </button>
+            ></button>
           </div>
           <div className="modal-body">
             <p>Hello uwu</p>
@@ -36,7 +32,7 @@ const Modal = () => {
               className="btn btn-secondary"
               onClick={closeModal}
             >
-              Close
+              Cerrar
             </button>
           </div>
         </div>
